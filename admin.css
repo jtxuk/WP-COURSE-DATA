@@ -1,0 +1,117 @@
+/* Estilos para la tabla de cursos */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #eaeaea;
+}
+
+/* Estilos para el botón */
+button#guardar-cambios {
+    background-color: #0073aa;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    letter-spacing: 2;
+}
+
+/* Estilos para la celda que contiene el botón Eliminar */
+td.eliminar-celda {
+  width: 100px; /* Ajusta el tamaño de la celda */
+  text-align: center; /* Alinea el contenido al centro */
+  padding: 5px; /* Añade un poco de espacio alrededor del contenido */
+}
+
+/* Estilos para el botón Eliminar */
+button.eliminar-curso {
+  background-color: #f44336; /* Color de fondo del botón */
+  color: white; /* Color del texto */
+  border: none; /* Sin bordes */
+  cursor: pointer; /* Cambia el cursor al pasar el ratón */
+  padding: 8px 16px; /* Espacio interno del botón */
+  font-size: 14px; /* Tamaño del texto */
+  border-radius: 4px; /* Bordes redondeados */
+  text-decoration: none; /* Elimina el subrayado si es un enlace */
+  transition: background-color 0.3s; /* Transición suave al cambiar el color de fondo */
+}
+
+/* Cambia el color de fondo al pasar el ratón por encima */
+button.eliminar-curso:hover {
+  background-color: #e53935;
+}
+
+button#guardar-cambios:hover {
+    background-color: #005177;
+}
+
+/* Estilos formulario añadir curso */
+.formulario-anadir-curso {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.formulario-anadir-curso h1 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.formulario-anadir-curso label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.formulario-anadir-curso input[type="text"] {
+    width: 100%;
+    padding: 5px 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.formulario-anadir-curso input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #0073aa;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.formulario-anadir-curso input[type="submit"]:hover {
+    background-color: #0095dd;
+}
