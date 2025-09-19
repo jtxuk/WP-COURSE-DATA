@@ -1,66 +1,57 @@
 jQuery(document).ready(function ($) {
 
-    $("#guardar-cambios").click(function () {
-    
+    // Guardar cambios en la edición en línea de la tabla de cursos
+    $("#guardar-cambios").on("click", function () {
         let cursos = [];
 
-        $("table tr").each(function (index) {
-        
-            if (index > 0) {
-                let curso = {
-                    nombre: $(this).find("td:nth-child(2)").text(),
-                    fecha: $(this).find("td:nth-child(3)").text(),
-                    horario: $(this).find("td:nth-child(4)").text(),
-                    precio: $(this).find("td:nth-child(5)").text(),
-                };
-                cursos.push(curso);
+        $("table.widefat tbody tr").each(function () {
+            let celdas = $(this).find("td");
+            // Prevenir filas vacías
+            if (celdas.length >= 5) {
+                cursos.push({
+                    nombre: celdas.eq(1).text().trim(),
+                    fecha: celdas.eq(2).text().trim(),
+                    horario: celdas.eq(3).text().trim(),
+                    precio: celdas.eq(4).text().trim()
+                });
             }
-            
         });
 
         let data = {
-        
             action: "guardar_cambios_cursos",
             cursos: cursos,
-            security: datos_cursos_ajax_obj.security,
-            
+            security: datos_cursos_ajax_obj.security
         };
 
-		$.post(datos_cursos_ajax_obj.ajax_url, data, function (response) {
-		
-		    var mensajeActualizacion = $("#mensaje-actualizacion");
-		
-		    if (response.success) {
-		    
-		        mensajeActualizacion.text(response.data);
-		        mensajeActualizacion.css("color", "green");
-		        
-		    } else {
-		    
-		        mensajeActualizacion.text('Error: ' + response.data);
-		        mensajeActualizacion.css("color", "red");
-		    }
-		
-		    mensajeActualizacion.fadeIn().delay(3000).fadeOut();
-		});
-		
+        $.post(datos_cursos_ajax_obj.ajax_url, data, function (response) {
+            var $mensaje = $("#mensaje-actualizacion");
+            if (response.success) {
+                $mensaje.text(response.data).css("color", "green");
+            } else {
+                $mensaje.text('Error: ' + response.data).css("color", "red");
+            }
+            $mensaje.fadeIn().delay(2500).fadeOut();
+        });
     });
-    
-	  $(document).on("click", ".eliminar-curso", function () {
-	    var cursoId = $(this).data("curso-id");
-	    var data = {
-	      action: "eliminar_curso",
-	      security: datos_cursos_ajax_obj.security,
-	      curso_id: cursoId,
-	    };
-	
-	    $.post(datos_cursos_ajax_obj.ajax_url, data, function (response) {
-	      if (response.success) {
-	        location.reload();
-	      } else {
-	        alert(response.data);
-	      }
-	    });
-	});
-	
+
+    // Eliminar curso (confirmación incluida)
+    $(document).on("click", ".eliminar-curso", function () {
+        if (!confirm("¿Seguro que deseas eliminar este curso?")) return;
+        var cursoId = $(this).data("curso-id");
+        var data = {
+            action: "eliminar_curso",
+            security: datos_cursos_ajax_obj.security,
+            curso_id: cursoId
+        };
+
+        $.post(datos_cursos_ajax_obj.ajax_url, data, function (response) {
+            if (response.success) {
+                // Eliminado correctamente, recargar la página
+                location.reload();
+            } else {
+                alert("Error: " + response.data);
+            }
+        });
+    });
+
 });
