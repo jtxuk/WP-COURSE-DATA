@@ -1,10 +1,21 @@
 <?php
 /*
 Plugin Name: Datos Cursos
+Plugin URI: https://github.com/jtxuk/WP-COURSE-DATA
 Description: Un plugin para agregar y gestionar los datos de todos los cursos de forma sencilla.
 Author: Josep TXK
 Version: 1.1
 */
+
+
+// Incluye la librería de actualización desde GitHub
+require 'plugin-update-checker/plugin-update-checker.php';
+
+$actualizador = Puc_v4_Factory::buildUpdateChecker(
+    'https://github.com/jtxuk/WP-COURSE-DATA/', // URL de tu repo
+    __FILE__, // Archivo principal
+    'datos-cursos' // Slug único
+);
 
 /**
  * Añade las páginas del menú de administración.
